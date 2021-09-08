@@ -8,29 +8,24 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="/dist/css/materialize.min.css"
-      media="screen,projection"
-    />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css" />
     <title>ChatterBox</title>
   </head>
   <body>
     <div class="container join-container">
-      <header class="deep-purple white-text">
-        <h1 class="flow-text join-header">
+      <header class="ui icon header white-text">
+        <h1 class="ui header">
           <i class="material-icons small">chat_bubble_outline</i>
           ChatterBox
         </h1>
       </header>
       <main class="join-main black lighten-5">
         <div>
-          <div class="input-field">
+          <div class="ui attached message">
             <input
               type="text"
-              class="white-text"
+              class="ui input"
               name="username"
               id="username"
               required
@@ -40,7 +35,7 @@
 
           <button
             id="index-submit-btn"
-            class="btn waves-effect waves-light teal"
+            class="ui primary button"
           >
             Join Chat
           </button>
@@ -49,6 +44,10 @@
     </div>
 
     <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="/dist/js/materialize.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="/dist/js/materialize.min.js"></script> -->
   </body>
 </html>
