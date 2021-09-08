@@ -21,11 +21,28 @@ app.use(
 // Username of auto-generated messages
 const ADMIN = "Admin";
 
-// Collections
 let USERS = []; 
-let ROOMS = []; 
+let ROOMS = [
+  {
+    name: "Public",
+    password: "",
+    public: true,
+    users: [],
+  },
+  {
+    name: "Educational",
+    password: "",
+    public: true,
+    users: [],
+  },
+  {
+    name: "Gaming",
+    password: "",
+    public: true,
+    users: [],
+  },
+]; 
 let MESSAGES = []; 
-
 
 app.get("/api/rooms", (req, res) => {
   let list = [];
@@ -37,6 +54,8 @@ app.get("/api/rooms", (req, res) => {
   });
   res.send(list);
 });
+
+
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

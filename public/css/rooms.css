@@ -10,18 +10,18 @@
   overflow: hidden;
 }
 
-.header {
+/* .header {
   padding: 20px;
   margin-top: 0;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   margin-bottom: 0;
-}
+} */
 
-.main {
+/* .main {
   max-height: 500px;
   overflow-y: scroll;
-}
+} */
 
 .rooms-collection {
   margin: 1em;

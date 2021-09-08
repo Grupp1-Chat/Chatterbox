@@ -4,26 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!--Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <!--Import materialize.css-->
     <link
-      type="text/css"
       rel="stylesheet"
-      href="/dist/css/materialize.min.css"
-      media="screen,projection"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.css" integrity="sha512-CPLGe+O/BzgzHJKpdBXUuewmlxhlEfQ00zuYg1vcGCjOo88mqMeO1qa8q397ifxm18D12Go8OF7A42CjOKEl/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="css/rooms.css" />
-    <title>Chat App</title>
+    <title>ChatterBox - Rooms</title>
   </head>
   <body>
-    <div class="main-container container black white-text">
-      <header class="deep-purple white-text">
-        <h1 class="flow-text header left">
-          <i class="material-icons small">people</i>
+    <div class="container" style="text-align:center;">
+      <div class="ui card">
+        <h3 class="ui header">
+          <i class="wechat icon"></i>
           Rooms
           <a
             href="#modal-create"
@@ -34,49 +35,25 @@
               teal
             "
           >
-            <i class="material-icons small">add</i>
+            <i class="plus icon"></i>
           </a>
-        </h1>
-        <h1 class="flow-text header right teal-text text-lighten-3">
+        </h3>
+        <h3 class="ui header">
+
           User
-          <a href="/"
-            ><i class="material-icons circle small red white-text"
-              >power_settings_new</i
-            ></a
-          >
-        </h1>
+          <a href="/"><i class="sign-out icon"></i></a>
+        </h3>
         <div class="clearfix"></div>
-      </header>
+    </div>
       <div class="main">
         <ul
           id="rooms-collection-display"
-          class="collection black-text rooms-collection"
-        >
-          <!-- <li class="collection-item avatar">
-            <i class="material-icons circle green">person_pin</i>
-            <span class="title">Room Name</span>
-            <p>3 online users</p>
-            <button
-              data-target="modal"
-              class="
-                secondary-content
-                btn
-                modal-trigger
-                btn-small
-                teal
-                waves-effect waves-light
-              "
-            >
-              Join Group
-            </button>
-          </li> -->
-        </ul>
+        ></ul>
       </div>
     </div>
-    <!-- Modal Structure -->
-    <div id="modal-join" class="modal">
+    <!-- <div id="modal-join" class="ui modal">
       <div class="modal-content">
-        <h4 class="teal white-text modal-title">
+        <h4 class="ui header">
           Join Room: <span id="modal-room-name"></span>
         </h4>
         <div class="input-field">
@@ -101,11 +78,11 @@
           >Join</a
         >
       </div>
-    </div>
+    </div> -->
 
-    <div id="modal-create" class="modal">
+    <!-- <div id="modal-create" class="modal">
       <div class="modal-content">
-        <h4 class="teal white-text modal-title">Create Room</h4>
+        <h4 class="ui header">Create Room</h4>
         <div class="input-field">
           <input
             type="text"
@@ -114,7 +91,7 @@
             id="create-room-name"
             required
           />
-          <label for="username" class="active">Room name</label>
+          <div class="ui label" for="username">Room Name</div>
         </div>
         <div class="input-field">
           <input
@@ -124,7 +101,7 @@
             id="create-room-password"
             required
           />
-          <label for="username" class="active">Room password</label>
+          <div class="ui label" for="username">Room password</div>
         </div>
       </div>
       <div class="modal-footer">
@@ -138,10 +115,16 @@
           >Create</a
         >
       </div>
-    </div>
+    </div> -->
 
-    <script src="./js/room.js"></script>
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="/dist/js/materialize.min.js"></script>
+    <script src="rooms.js"></script>
+    <!-- <script type="text/javascript" src="/dist/js/materialize.min.js"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.min.js" integrity="sha512-aAW/TaSuYfyjTcMsaYP67Dwe0vI5d7ej9X7NJBPkhafB+D5kx57flRNo8+tOXWA0Gcq0MBmhPatrvn1YwvH9gQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
   </body>
 </html>

@@ -8,21 +8,28 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>ChatterBox</title>
   </head>
   <body>
-    <div class="container join-container">
-      <header class="ui icon header white-text">
+    <div class="ui container">
+      <header class="ui icon header">
         <h1 class="ui header">
           <i class="material-icons small">chat_bubble_outline</i>
           ChatterBox
         </h1>
       </header>
-      <main class="join-main black lighten-5">
-        <div>
-          <div class="ui attached message">
+      <div class="ui form">
+          <div class="field">
+            <div class="ui label">Username</div>
+            <br />
             <input
               type="text"
               class="ui input"
@@ -30,24 +37,25 @@
               id="username"
               required
             />
-            <label for="username" class="active">Username</label>
+
+
+          <button class="ui right labeled icon button primary" id="index-submit-btn">
+  <i class="right arrow icon"></i>
+  Join
+</button>
           </div>
 
-          <button
-            id="index-submit-btn"
-            class="ui primary button"
-          >
-            Join Chat
-          </button>
-        </div>
-      </main>
+
+        
+      </div>
     </div>
 
     <script type="text/javascript" src="index.js"></script>
     <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
     <!-- <script type="text/javascript" src="/dist/js/materialize.min.js"></script> -->
   </body>
 </html>
