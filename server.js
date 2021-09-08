@@ -10,8 +10,33 @@ const io = socketio(server);
 
 app.use(express.json());
 
+// Set static folder
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  express.static(path.join(__dirname, "node_modules", "materialize-css"))
+);
 
+
+
+// Username of auto-generated messages
+const ADMIN = "Admin";
+
+// Collections
+let USERS = []; 
+let ROOMS = []; 
+let MESSAGES = []; 
+
+
+app.get("/api/rooms", (req, res) => {
+  let list = [];
+  ROOMS.forEach((element) => {
+    list.push({
+      name: element.name,
+      userCount: element.users.length,
+    });
+  });
+  res.send(list);
+});
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

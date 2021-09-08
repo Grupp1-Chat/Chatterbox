@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/dist/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <link rel="stylesheet" href="css/rooms.css" />
+    <title>Chat App</title>
+  </head>
+  <body>
+    <div class="main-container container black white-text">
+      <header class="deep-purple white-text">
+        <h1 class="flow-text header left">
+          <i class="material-icons small">people</i>
+          Rooms
+          <a
+            href="#modal-create"
+            class="
+              btn-floating btn-medium
+              waves-effect waves-light
+              modal-trigger
+              teal
+            "
+          >
+            <i class="material-icons small">add</i>
+          </a>
+        </h1>
+        <h1 class="flow-text header right teal-text text-lighten-3">
+          User
+          <a href="/"
+            ><i class="material-icons circle small red white-text"
+              >power_settings_new</i
+            ></a
+          >
+        </h1>
+        <div class="clearfix"></div>
+      </header>
+      <div class="main">
+        <ul
+          id="rooms-collection-display"
+          class="collection black-text rooms-collection"
+        >
+
+        </ul>
+      </div>
+    </div>
+    <div id="modal-join" class="modal">
+      <div class="modal-content">
+        <h4 class="teal white-text modal-title">
+          Join Room: <span id="modal-room-name"></span>
+        </h4>
+        <div class="input-field">
+          <input
+            type="text"
+            class="black-text"
+            name="roomname"
+            id="join-room-password"
+            required
+          />
+          <label for="username" class="active">Room password</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+          >Close</a
+        >
+        <a
+          href="#!"
+          id="join-room-btn"
+          class="modal-close waves-effect waves-light btn teal white-text"
+          >Join</a
+        >
+      </div>
+    </div>
+
+    <div id="modal-create" class="modal">
+      <div class="modal-content">
+        <h4 class="teal white-text modal-title">Create Room</h4>
+        <div class="input-field">
+          <input
+            type="text"
+            class="black-text"
+            name="roomname"
+            id="create-room-name"
+            required
+          />
+          <label for="username" class="active">Room name</label>
+        </div>
+        <div class="input-field">
+          <input
+            type="text"
+            class="black-text"
+            name="password"
+            id="create-room-password"
+            required
+          />
+          <label for="username" class="active">Room password</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+          >Close</a
+        >
+        <a
+          href="#!"
+          id="create-room-btn"
+          class="modal-close waves-effect waves-light btn teal white-text"
+          >Create</a
+        >
+      </div>
+    </div>
+
+    <script src="rooms.js"></script>
+    <script type="text/javascript" src="/dist/js/materialize.min.js"></script>
+  </body>
+</html>

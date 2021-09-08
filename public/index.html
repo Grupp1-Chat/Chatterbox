@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/dist/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <title>ChatterBox</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <div class="container join-container">
+      <header class="deep-purple white-text">
+        <h1 class="flow-text join-header">
+          <i class="material-icons small">chat_bubble_outline</i>
+          ChatterBox
+        </h1>
+      </header>
+      <main class="join-main black lighten-5">
+        <div>
+          <div class="input-field">
+            <input
+              type="text"
+              class="white-text"
+              name="username"
+              id="username"
+              required
+            />
+            <label for="username" class="active">Username</label>
+          </div>
+
+          <button
+            id="index-submit-btn"
+            class="btn waves-effect waves-light teal"
+          >
+            Join Chat
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="/dist/js/materialize.min.js"></script>
+  </body>
 </html>

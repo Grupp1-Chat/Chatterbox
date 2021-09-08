@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/dist/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ChatCord App</title>
+  </head>
+  <body>
+    <div class="container white-text chat-container">
+      <header class="deep-purple chat-header">
+        <h1 class="left">
+          <i class="material-icons medium">chat_bubble_outline</i> Chat App
+        </h1>
+        <a
+          href="/rooms.html"
+          class="btn waves-effect waves-light right red lighten-1"
+          >Leave Room</a
+        >
+        <div class="clearfix"></div>
+      </header>
+      <main class="black chat-main">
+        <div class="chat-sidebar">
+          <h3 class="flow-text"><i class="fas fa-comments"></i> Room Name:</h3>
+          <h2 id="room-name" class="flow-text">JavaScript</h2>
+          <h3 class="flow-text"><i class="fas fa-users"></i> Users</h3>
+          <ul id="users">
+            <li>test</li>
+     
+          </ul>
+        </div>
+        <div class="chat-messages">
+
+        </div>
+      </main>
+      <div class="chat-form-container black">
+        <form id="chat-form">
+          <input
+            id="msg"
+            type="text"
+            class="white"
+            placeholder="Type a message..."
+            required
+            autocomplete="off"
+          />
+          <button class="btn btn-large">
+            <i class="large material-icons">send</i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      if (!window.sessionStorage.getItem("room")) window.location.href = "/";
+
+      window.onunload = () => {
+        // Clear the local storage
+        window.sessionStorage.removeItem("room");
+      };
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+    <script type="text/javascript" src="/dist/js/materialize.min.js"></script>
+  </body>
+</html>
