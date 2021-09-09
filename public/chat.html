@@ -8,53 +8,54 @@
       rel="stylesheet"
     />
     <link
-      type="text/css"
       rel="stylesheet"
-      href="/dist/css/materialize.min.css"
-      media="screen,projection"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <title>ChatCord App</title>
+    <title>ChatterBox</title>
   </head>
   <body>
-    <div class="container white-text chat-container">
-      <header class="deep-purple chat-header">
-        <h1 class="left">
-          <i class="material-icons medium">chat_bubble_outline</i> Chat App
-        </h1>
-        <a
+    <div class="ui container">
+                 <header class="ui icon header">
+              <h1 class="ui header">
+                <i class="material-icons small">chat_bubble_outline</i>
+                ChatterBox
+              </h1>
+                      <a
           href="/rooms.html"
           class="btn waves-effect waves-light right red lighten-1"
           >Leave Room</a
         >
-        <div class="clearfix"></div>
-      </header>
+            </header>
       <main class="black chat-main">
         <div class="chat-sidebar">
           <h3 class="flow-text"><i class="fas fa-comments"></i> Room Name:</h3>
           <h2 id="room-name" class="flow-text">JavaScript</h2>
-          <h3 class="flow-text"><i class="fas fa-users"></i> Users</h3>
-          <ul id="users">
-            <li>test</li>
+          <h3 class="flow-text"><i class="wechat icon"></i> Users</h3>
+          <ul id="users" class="ui list">
+            <li class="item"></li>
      
           </ul>
         </div>
-        <div class="chat-messages">
+        <div class="ui comments">
 
         </div>
       </main>
       <div class="chat-form-container black">
-        <form id="chat-form">
+        <form id="chat-form" class="ui form">
           <input
             id="msg"
             type="text"
-            class="white"
+            class="ui input"
             placeholder="Type a message..."
             required
             autocomplete="off"
           />
-          <button class="btn btn-large">
-            <i class="large material-icons">send</i>
+          <button class="ui button">
+            <i class="arrow right icon"></i>
           </button>
         </form>
       </div>
@@ -70,6 +71,24 @@
     </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
-    <script type="text/javascript" src="/dist/js/materialize.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
+    <style type="text/css">
+      body {
+        background-color: #dadada;
+      }
+      body > .grid {
+        height: 100%;
+      }
+      .image {
+        margin-top: -100px;
+      }
+      .column {
+        max-width: 450px;
+      }
+    </style>

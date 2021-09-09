@@ -55,6 +55,17 @@ app.get("/api/rooms", (req, res) => {
   res.send(list);
 });
 
+// io.on("connection", (socket) => {
+//   socket.on("refresh", () => {
+//     socket.join("__refresh_room");
+//   });
+
+//   // Welcome message
+//   socket.emit(
+//     "message",
+//     messageFormat(ADMIN, `Welcome ${user.username}! Happy chatting!`)
+//   );
+// })
 
 
 const PORT = process.env.PORT || 3000;
