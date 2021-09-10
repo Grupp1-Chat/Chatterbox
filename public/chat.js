@@ -1,18 +1,25 @@
 // Get elements in DOM
 const chatForm = document.getElementById("chat-form");
 const chatMessages = document.querySelector(".chat-messages");
+const chatInput = document.getElementById("msg");
 const roomName = document.getElementById("room-name");
 const userList = document.getElementById("users");
 const graphics = document.getElementById("graphics-container");
 
 // Initialize socket for client
 const socket = io();
-const username=window.sessionStorage.getItem("username")
-console.log("username: "+ username)
-const room=window.sessionStorage.getItem("room")
-console.log("room: " +room)
-socket.emit("joinRoom", {username, room});
 
+// Displays the username to the DOM
+document.getElementById("chat-room-uname-display").innerText =
+  window.sessionStorage.getItem("username");
+
+// Once a user enters chat.html, user sends its credentials to be recorded by the server
+socket.emit("joinRoom", {
+  username: window.sessionStorage.getItem("username"),
+  room: window.sessionStorage.getItem("room"),
+});
+
+// An event to output every messages received to the chatbox
 socket.on("message", (message) => {
   outputMessage(message);
 
@@ -21,15 +28,13 @@ socket.on("message", (message) => {
 });
 
 // Configure room and users to DOM
-socket.on("roomUsers", ({ name, users }) => {
+socket.on("configurations", ({ name, users }) => {
   roomName.innerText = name;
 
   userList.innerHTML = "";
-  console.log(users)
   users.forEach((user) => {
-    const li = document.createElement("li");
-    li.innerText = user.username;
-    userList.appendChild(li);
+    // <span class="orange-text"><i> is Typing...</i></span>
+    userList.innerHTML += `<li id="user-list-${user}" style="font-weight:bold;">${user}</li>`;
   });
 });
 
@@ -42,41 +47,86 @@ chatForm.addEventListener("submit", (e) => {
 
   msg = msg.trim();
 
+  // Cancel operation if the user sends null
   if (!msg) {
     return false;
   }
 
+  // Checks if message is a command query
   if (msg === "/") {
     const commands = `
-      <span class="orange-text">/gifs</span> [your search keyword here] <br>
-        - Gives you a list of gifs.
+      <span class="orange-text">/gifs</span> <span class="blue-text text-lighten-4">[your search keyword here]</span> <br>
+        - Gives you a list of gifs. <br>
+      <span class="orange-text">/stickers</span> <span class="blue-text text-lighten-4">[your search keyword here]</span> <br>
+      - Gives you a list of stickers. <br>
+      <span class="orange-text">/emojis</span> <br>
+      - Gives you a list of emojis. <br>
+      <span class="orange-text">/emojis</span> <span class="blue-text text-lighten-4">[your search keyword here]</span> <br>
+      - Search a list of emojis with your keyword. <br>
+      <span class="orange-text">/rules</span> <br>
+      - Display the rules of the room. <br>
+      <span class="orange-text">/make-rules</span> <span class="blue-text text-lighten-4">[your rule here]</span> <br>
+      - Add a rule to the room's rule list. <br>
+      <span class="orange-text">/reset-rules</span> <br>
+      - Deletes all rules of the room. <br>
     `;
 
     e.target.elements.msg.value = "";
     e.target.elements.msg.focus();
-    return outputMessage({
-      username: "Chat Bot",
-      time: "System time",
-      content: commands,
-    });
+    // Sends a list of commands and return
+    return socket.emit("chat-bot-message", commands);
   }
 
+  // Checks for commands by the user
   if (msg.startsWith("/")) {
     const msgArr = msg.split(" ");
     const cmd = msgArr.shift();
     const query = msgArr.join(" ").trim();
     e.target.elements.msg.value = "";
     if (cmd === "/gifs") {
-      // For gif searching
-      socket.emit("search-gifs", query);
       graphics.classList.remove("no-display");
+      loadContents();
+      if (query === "") return noResult();
+      socket.emit("search-gifs", query);
       return;
+    } else if (cmd === "/stickers") {
+      graphics.classList.remove("no-display");
+      loadContents();
+      if (query === "") return noResult();
+      socket.emit("search-stickers", query);
+      return;
+    } else if (cmd === "/emojis") {
+      graphics.classList.remove("no-display");
+      loadContents();
+      if (query === "") return socket.emit("get-all-emojis");
+      socket.emit("search-emojis", query);
+      return;
+    } else if (cmd === "/rules") {
+      if (query !== "")
+        return socket.emit(
+          "chat-bot-message",
+          `<span class="red-text">Error:</span> Command <span class="orange-text">"${cmd}"</span> should not have queries.`
+        );
+      return socket.emit("get-room-rules", query);
+    } else if (cmd === "/make-rules") {
+      if (query === "")
+        return socket.emit(
+          "chat-bot-message",
+          `<span class="red-text">Error:</span> Command <span class="orange-text">"${cmd}"</span> should have a query.`
+        );
+      return socket.emit("make-room-rules", query);
+    } else if (cmd === "/reset-rules") {
+      if (query !== "")
+        return socket.emit(
+          "chat-bot-message",
+          `<span class="red-text">Error:</span> Command <span class="orange-text">"${cmd}"</span> should not have queries.`
+        );
+      return socket.emit("delete-room-rules", query);
     } else {
-      return outputMessage({
-        username: "Chat Bot",
-        time: "System time",
-        content: `<span class="red-text">Error:</span> Command <span class="orange-text">"${cmd}"</span> not found.`,
-      });
+      return socket.emit(
+        "chat-bot-message",
+        `<span class="red-text">Error:</span> Command <span class="orange-text">"${cmd}"</span> not found.`
+      );
     }
   }
 
@@ -91,23 +141,60 @@ chatForm.addEventListener("submit", (e) => {
 // Display the list of searched gifs
 socket.on("search-gifs", ({ data }) => {
   graphics.innerHTML = "";
-  data.forEach((item) => outputGifs(item));
+  if (data.length > 0) {
+    data.forEach((item) => outputGifs(item));
+    return;
+  }
+  noResult();
 });
 
+// Display the list of searched stickers
+socket.on("search-stickers", (data) => {
+  graphics.innerHTML = "";
+  if (data.length > 0) {
+    data.forEach((item) => outputStickers(item));
+    return;
+  }
+  noResult();
+});
+
+// Display the list of all emojis
+socket.on("get-all-emojis", (data) => {
+  if (!data) return noResult();
+  graphics.innerHTML = "";
+  data.forEach((item) => {
+    graphics.innerHTML += `<a onclick="displayEmoji(this)" class="btn-flat" id="${item.character}">${item.character}</a>`;
+  });
+});
+
+// Display the list of searched emojis
+socket.on("search-emojis", (data) => {
+  if (!data) return noResult();
+  graphics.innerHTML = "";
+  data.forEach((item) => {
+    graphics.innerHTML += `<a onclick="displayEmoji(this)" class="btn-flat" id="${item.character}">${item.character}</a>`;
+  });
+});
+
+// Outputs emoji to chat box
+function displayEmoji(e) {
+  chatInput.value += e.id;
+}
+
 // Manage the graphics div
-/* document.addEventListener("click", (e) => {
+document.addEventListener("click", (e) => {
   if (graphics !== e.target && !graphics.contains(e.target)) {
     graphics.classList.add("no-display");
+    graphics.innerHTML = "";
   }
-}); */
+});
 
 // Output message to DOM
 function outputMessage(message) {
-  console.log("i ouput message" + message)
   const div = document.createElement("div");
   message.username === "You"
-    ? div.setAttribute("class", "ui floating green message ")
-    : div.setAttribute("class", "ui floating blue message");
+    ? div.setAttribute("class", "message teal darken-4")
+    : div.setAttribute("class", "grey darken-3 message");
   const p = document.createElement("p");
   message.username === "You"
     ? p.setAttribute("class", "meta red-text text-lighten-3")
@@ -121,7 +208,7 @@ function outputMessage(message) {
   para.classList.add("text");
   para.innerHTML = message.content;
   div.appendChild(para);
-  document.querySelector(".ui.comments").appendChild(div);
+  document.querySelector(".chat-messages").appendChild(div);
 }
 
 // Output Gifs to Dom
@@ -138,3 +225,75 @@ function outputGifs(gif) {
   };
   graphics.appendChild(img);
 }
+
+// Output Stickers to DOM
+function outputStickers(sticker) {
+  graphics.innerHTML += `<img src="${sticker.images.fixed_height_downsampled.url}" onclick="useSticker(this)" class="graphics-container-item" />`;
+}
+
+// Send sticker as a message
+function useSticker(e) {
+  const message = `<img src="${e.src}" class="graphics-container-item" />`;
+  socket.emit("chat-message", message);
+  graphics.classList.add("no-display");
+  graphics.innerHTML = "";
+}
+
+// No command result
+function noResult() {
+  const element = `<span class="orange-text flow-text" style="margin:1em">No result found.</span>`;
+  graphics.innerHTML = element;
+}
+
+// Preloader for waiting to fetch results
+function loadContents() {
+  graphics.innerHTML = `
+  <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+  `;
+}
+
+//
+//
+//
+// Typing check to display which users are currently typing
+
+const timeOut = new Map();
+chatInput.onkeydown = () => {
+  const id = "user-list-" + window.sessionStorage.getItem("username");
+  socket.emit("typing-start", id);
+};
+
+function typingStop(id) {
+  const element = document.getElementById(id);
+  if (!element) return;
+  element.removeChild(element.lastElementChild);
+  clearTimeout(timeOut.get(id));
+  timeOut.delete(id);
+}
+
+socket.on("typing-start", (id) => {
+  if (timeOut.get(id)) {
+    clearTimeout(timeOut.get(id));
+    timeOut.delete(id);
+    timeOut.set(
+      id,
+      setInterval(() => typingStop(id), 500)
+    );
+    return;
+  }
+  const element = document.getElementById(id);
+  element.innerHTML += `<span class="orange-text"><i> is Typing...</i></span>`;
+  timeOut.set(
+    id,
+    setInterval(() => typingStop(id), 500)
+  );
+});

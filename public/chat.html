@@ -3,62 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <!--Import materialize.css-->
     <link
+      type="text/css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      href="/dist/css/materialize.min.css"
+      media="screen,projection"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <title>ChatterBox</title>
+    <title>ChatCord App</title>
   </head>
   <body>
-    <div class="ui container">
-                 <header class="ui icon header">
-              <h1 class="ui header">
-                <i class="material-icons small">chat_bubble_outline</i>
-                ChatterBox
-              </h1>
-                      <a
-          href="/rooms.html"
-          class="btn waves-effect waves-light right red lighten-1"
-          >Leave Room</a
+    <div class="container white-text chat-container">
+      <header class="deep-purple chat-header">
+        <h1 class="left">
+          <i class="material-icons medium">chat_bubble_outline</i> Chat App
+        </h1>
+        <div
+          class="right"
+          style="display: flex; flex-direction: column; align-items: flex-end"
         >
-            </header>
+          <a
+            href="/rooms.html"
+            class="btn waves-effect waves-light red lighten-1"
+            >Leave Room</a
+          >
+          <span
+            class="flow-text teal-text text-lighten-3"
+            id="chat-room-uname-display"
+            >User</span
+          >
+        </div>
+        <div class="clearfix"></div>
+      </header>
       <main class="black chat-main">
         <div class="chat-sidebar">
-          <h3 class="ui header"><i class="fas fa-comments"></i> Room Name:</h3>
-          <h2 id="room-name" class="ui header">JavaScript</h2>
-          <h3 class="ui header"><i class="wechat icon"></i> Users</h3>
-          <ul id="users" class="ui list">
-            <li class="item"></li>
-     
+          <h3 class="flow-text"><i class="fas fa-comments"></i> Room Name:</h3>
+          <h2 id="room-name" class="flow-text teal-text">JavaScript</h2>
+          <h3 class="flow-text"><i class="fas fa-users"></i> Users</h3>
+          <ul id="users" class="teal-text">
+            <li style="font-weight: bold">
+              Brad <span class="orange-text"><i> is Typing...</i></span>
+            </li>
+            <li>John</li>
+            <li>Mary</li>
+            <li>Paul</li>
+            <li>Mike</li>
           </ul>
         </div>
-        <div class="ui comments">
-          <div class="chat-messages">
-            
-          </div>
+        <div class="chat-messages">
+
+        </div>
+        <div
+          class="graphics-container white container no-display"
+          id="graphics-container"
+        >
 
         </div>
       </main>
       <div class="chat-form-container black">
-        <form id="chat-form" class="ui form">
+        <form id="chat-form">
           <input
             id="msg"
             type="text"
-            class="ui input"
+            class="white"
             placeholder="Type a message..."
             required
             autocomplete="off"
           />
-          <button class="ui button">
-            <i class="arrow right icon"></i>
+          <button class="btn btn-large">
+            <i class="large material-icons">send</i>
           </button>
         </form>
       </div>
@@ -73,25 +92,8 @@
       };
     </script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="chat.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"
-    ></script>
+    <script src="./chat.js"></script>
+    <!--JavaScript at end of body for optimized loading -->
+    <script type="text/javascript" src="/dist/js/materialize.min.js"></script>
   </body>
 </html>
-    <style type="text/css">
-      body {
-        background-color: #dadada;
-      }
-      body > .grid {
-        height: 100%;
-      }
-      .image {
-        margin-top: -100px;
-      }
-      .column {
-        max-width: 450px;
-      }
-    </style>
