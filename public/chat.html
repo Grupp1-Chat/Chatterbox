@@ -29,7 +29,7 @@
     <div class="ui container">
       <header class="ui menu b">
         <h1 class="ui header">
-          <i class="material-icons medium">chat_bubble_outline</i> Chat App
+          <i class="wechat icon"></i> ChatterBox
         </h1>
         <div class="right menu">
           <span class="ui item" id="chat-room-uname-display">User</span>
@@ -46,34 +46,32 @@
           <h3 class="ui header"><i class="fas fa-comments"></i> Room Name:</h3>
           <h2 id="room-name" class="ui header">JavaScript</h2>
           <h3 class="ui header"><i class="fas fa-users"></i> Users</h3>
-          <ul id="users" class="teal-text">
-            <li style="font-weight: bold">
-              Brad <span class="orange-text"><i> is Typing...</i></span>
+          <ul id="users" class="ui list">
+            <li style="font-weight: bold" class="item">
+              <span class="ui green inverted header"><i> is Typing...</i></span>
             </li>
-            <li>John</li>
-            <li>Mary</li>
-            <li>Paul</li>
-            <li>Mike</li>
           </ul>
         </div>
+
         <div class="chat-messages"></div>
+
         <div
           class="graphics-container white container no-display"
           id="graphics-container"
         ></div>
       </main>
-      <div class="chat-form-container black">
-        <form id="chat-form">
+      <div class="chat-form-container ui black message">
+        <form id="chat-form" class="ui form">
           <input
             id="msg"
             type="text"
-            class="white"
+            class="ui action input"
             placeholder="Type a message..."
             required
             autocomplete="off"
           />
-          <button class="btn btn-large">
-            <i class="large material-icons">send</i>
+          <button class="ui blue button">
+            <i class="arrow alternate circle up icon"></i>
           </button>
         </form>
       </div>
@@ -89,7 +87,6 @@
     </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./chat.js"></script>
-    <!--JavaScript at end of body for optimized loading -->
     <script type="text/javascript" src="/dist/js/materialize.min.js"></script>
   </body>
 </html>
