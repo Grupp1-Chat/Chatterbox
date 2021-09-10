@@ -57,6 +57,7 @@ joinRoomBtn.onclick = () => {
   joinRoomPassword.value = "";
   joinRoomBtn.setAttribute("name", "");
   document.getElementById("modal-room-name").innerText = "";
+  
 
   fetch(`/api/rooms/${room}`, {
     method: "GET",
@@ -67,8 +68,10 @@ joinRoomBtn.onclick = () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (!data.verified) return alert("Wrong room password!");
-      window.sessionStorage.setItem("room", data.room);
+      if (password !== data.password) return alert("Wrong room password!");
+      
+      
+      window.sessionStorage.setItem("room", data.name);
       window.location.href = "/chat.html";
     });
 };
