@@ -7,11 +7,11 @@ const graphics = document.getElementById("graphics-container");
 
 // Initialize socket for client
 const socket = io();
-
-socket.emit("joinRoom", {
-  username: window.sessionStorage.getItem("username"),
-  room: window.sessionStorage.getItem("room"),
-});
+const username=window.sessionStorage.getItem("username")
+console.log("username: "+ username)
+const room=window.sessionStorage.getItem("room")
+console.log("room: " +room)
+socket.emit("joinRoom", {username, room});
 
 socket.on("message", (message) => {
   outputMessage(message);
@@ -21,13 +21,14 @@ socket.on("message", (message) => {
 });
 
 // Configure room and users to DOM
-socket.on("configurations", ({ name, users }) => {
+socket.on("roomUsers", ({ name, users }) => {
   roomName.innerText = name;
 
   userList.innerHTML = "";
+  console.log(users)
   users.forEach((user) => {
     const li = document.createElement("li");
-    li.innerText = user;
+    li.innerText = user.username;
     userList.appendChild(li);
   });
 });
@@ -94,14 +95,15 @@ socket.on("search-gifs", ({ data }) => {
 });
 
 // Manage the graphics div
-document.addEventListener("click", (e) => {
+/* document.addEventListener("click", (e) => {
   if (graphics !== e.target && !graphics.contains(e.target)) {
     graphics.classList.add("no-display");
   }
-});
+}); */
 
 // Output message to DOM
 function outputMessage(message) {
+  console.log("i ouput message" + message)
   const div = document.createElement("div");
   message.username === "You"
     ? div.setAttribute("class", "ui floating green message ")
@@ -119,7 +121,7 @@ function outputMessage(message) {
   para.classList.add("text");
   para.innerHTML = message.content;
   div.appendChild(para);
-  document.querySelector(".chat-messages").appendChild(div);
+  document.querySelector(".ui.comments").appendChild(div);
 }
 
 // Output Gifs to Dom

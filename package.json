@@ -4,6 +4,8 @@
   "description": "a chat app made with Socket.io",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon server",
+    "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
