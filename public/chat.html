@@ -15,37 +15,37 @@
       href="/dist/css/materialize.min.css"
       media="screen,projection"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="css/style.css" />
-    <title>ChatCord App</title>
+    <title>ChatterBox</title>
   </head>
   <body>
-    <div class="container white-text chat-container">
-      <header class="deep-purple chat-header">
-        <h1 class="left">
+    <div class="ui container">
+      <header class="ui menu b">
+        <h1 class="ui header">
           <i class="material-icons medium">chat_bubble_outline</i> Chat App
         </h1>
-        <div
-          class="right"
-          style="display: flex; flex-direction: column; align-items: flex-end"
-        >
-          <a
-            href="/rooms.html"
-            class="btn waves-effect waves-light red lighten-1"
-            >Leave Room</a
-          >
-          <span
-            class="flow-text teal-text text-lighten-3"
-            id="chat-room-uname-display"
-            >User</span
-          >
+        <div class="right menu">
+          <span class="ui item" id="chat-room-uname-display">User</span>
+
+          <button class="ui negative button">
+            <i class="user icon"></i>
+            <a href="/rooms.html" class="ui item">Leave Room</a>
+          </button>
         </div>
         <div class="clearfix"></div>
       </header>
-      <main class="black chat-main">
+      <main class="chat-main">
         <div class="chat-sidebar">
-          <h3 class="flow-text"><i class="fas fa-comments"></i> Room Name:</h3>
-          <h2 id="room-name" class="flow-text teal-text">JavaScript</h2>
-          <h3 class="flow-text"><i class="fas fa-users"></i> Users</h3>
+          <h3 class="ui header"><i class="fas fa-comments"></i> Room Name:</h3>
+          <h2 id="room-name" class="ui header">JavaScript</h2>
+          <h3 class="ui header"><i class="fas fa-users"></i> Users</h3>
           <ul id="users" class="teal-text">
             <li style="font-weight: bold">
               Brad <span class="orange-text"><i> is Typing...</i></span>
@@ -56,15 +56,11 @@
             <li>Mike</li>
           </ul>
         </div>
-        <div class="chat-messages">
-
-        </div>
+        <div class="chat-messages"></div>
         <div
           class="graphics-container white container no-display"
           id="graphics-container"
-        >
-
-        </div>
+        ></div>
       </main>
       <div class="chat-form-container black">
         <form id="chat-form">
