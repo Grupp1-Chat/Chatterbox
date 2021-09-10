@@ -13,3 +13,5 @@ function formatMessage(username, content) {
 console.log(moment().format("HH:mm"))
 
 module.exports = formatMessage
+
+
