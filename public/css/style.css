@@ -175,3 +175,12 @@ a {
   font-size: medium;
   width: 100%;
 }
+
+
+.orange-text {
+    color: #ff7700 !important;
+}
+
+.blue-text {
+    color: #077cdc !important;
+}

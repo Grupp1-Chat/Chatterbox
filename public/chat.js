@@ -55,19 +55,19 @@ chatForm.addEventListener("submit", (e) => {
   // Checks if message is a command query
   if (msg === "/") {
     const commands = `
-      <span class="orange-text">/gifs</span> <span class="blue-text text-lighten-4">[your search keyword here]</span> <br>
+      <span class="ui green ribbon label"> /gifs</span> <span class="blue-text">[your search keyword here]</span> <br>
         - Gives you a list of gifs. <br>
-      <span class="orange-text">/stickers</span> <span class="blue-text text-lighten-4">[your search keyword here]</span> <br>
+      <span class="ui green ribbon label">/stickers</span> <span class="blue-text">[your search keyword here]</span> <br>
       - Gives you a list of stickers. <br>
-      <span class="orange-text">/emojis</span> <br>
+      <span class="ui green ribbon label">/emojis</span> <br>
       - Gives you a list of emojis. <br>
-      <span class="orange-text">/emojis</span> <span class="blue-text text-lighten-4">[your search keyword here]</span> <br>
+      <span class="ui green ribbon label">/emojis</span> <span class="blue-text">[your search keyword here]</span> <br>
       - Search a list of emojis with your keyword. <br>
-      <span class="orange-text">/rules</span> <br>
+      <span class="ui green ribbon label">/rules</span> <br>
       - Display the rules of the room. <br>
-      <span class="orange-text">/make-rules</span> <span class="blue-text text-lighten-4">[your rule here]</span> <br>
+      <span class="ui green ribbon label">/make-rules</span> <span class="blue-text">[your rule here]</span> <br>
       - Add a rule to the room's rule list. <br>
-      <span class="orange-text">/reset-rules</span> <br>
+      <span class="ui green ribbon label">/reset-rules</span> <br>
       - Deletes all rules of the room. <br>
     `;
 
@@ -193,12 +193,12 @@ document.addEventListener("click", (e) => {
 function outputMessage(message) {
   const div = document.createElement("div");
   message.username === "You"
-    ? div.setAttribute("class", "message teal darken-4")
-    : div.setAttribute("class", "grey darken-3 message");
+    ? div.setAttribute("class", "ui positive message")
+    : div.setAttribute("class", "ui info message");
   const p = document.createElement("p");
   message.username === "You"
-    ? p.setAttribute("class", "meta red-text text-lighten-3")
-    : p.setAttribute("class", "meta deep-purple-text text-lighten-3");
+    ? p.setAttribute("class", "ui red horizontal label")
+    : p.setAttribute("class", "ui blue horizontal label");
   p.innerText = message.username;
   p.innerHTML += `<span class="${
     message.username === "You" ? "orange-text" : "teal-text text-lighten-2"
@@ -241,15 +241,15 @@ function useSticker(e) {
 
 // No command result
 function noResult() {
-  const element = `<span class="orange-text flow-text" style="margin:1em">No result found.</span>`;
+  const element = `<span class="ui red horizontal label " style="margin:1em">No result found.</span>`;
   graphics.innerHTML = element;
 }
 
 // Preloader for waiting to fetch results
 function loadContents() {
   graphics.innerHTML = `
-  <div class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-blue">
+  <div class="ui active inverted dimmer">
+      <div class="ui loader">
         <div class="circle-clipper left">
           <div class="circle"></div>
         </div><div class="gap-patch">
