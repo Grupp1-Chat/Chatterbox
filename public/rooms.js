@@ -85,11 +85,15 @@ joinRoomBtn.onclick = () => {
     .then((response) => response.json())
     .then((data) => {
       // If verification is unsuccessful, stop the process
-      if (password !== data.password) return alert("Wrong room password!");
 
-      // If verification is successful, sets the session storage and redirect to chat
-      window.sessionStorage.setItem("room", data.room);
-      window.location.href = "/chat.html";
+      if (!data.verified) {
+
+        return alert("Wrong room password!");
+      }else{ 
+        // If verification is successful, sets the session storage and redirect to chat
+        window.sessionStorage.setItem("room", data.room);
+        window.location.href = "/chat.html";
+      }
     });
 };
 
