@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 // Redirect to index when username does not exist in the session storage
 if (!window.sessionStorage.getItem("username")) window.location.href = "/";
 
@@ -14,6 +16,7 @@ const socket = io();
 // It does so to dynamically update user numbers in the rooms
 socket.emit("refresh");
 
+
 // Responds to refresh the contents of the page
 socket.on("refresh", (m) => {
   fetch("/api/rooms")
@@ -23,6 +26,24 @@ socket.on("refresh", (m) => {
       list.forEach((element) => outputRoom(element));
     });
 });
+
+socket.on("joinChat", ()=>{
+  const data = {
+    id:socket.id,
+    
+  }
+  
+  fetch("/api/users", {
+    method:"POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+
+  })
+  .then((reponse)=>response.json())
+  .then()
+})
 
 // Initializes the contents of the page
 document.addEventListener("DOMContentLoaded", function () {

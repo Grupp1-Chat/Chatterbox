@@ -64,6 +64,10 @@ app.post("/api/rooms", (req, res) => {
   };
   DB.createRoom(format, (result) => res.send(result));
 });
+app.post("api/users", (req, res)=>{
+  const users 
+
+})
 
 // SocketIO connection
 io.on("connection", (socket) => {
@@ -71,10 +75,14 @@ io.on("connection", (socket) => {
   socket.on("refresh", () => {
     socket.join("__refresh_room");
   });
+  //
+  //
+  // When a user joins chat
+  socket.on("joinChat", (user)=>{
+    const currentUser = {id: socket.id, name:user.username, room:""}
+    DB.createRoom(currentUser)
 
-  //
-  //
-  //
+  })
   // When a user joins a room
   socket.on("joinRoom", (user) => {
     const currentUser = { id: socket.id, name: user.username, room: user.room };
