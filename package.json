@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server",
-    "start": "node server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "db-reset": "node reset-db.js"
   },
   "author": "",
   "license": "ISC",
