@@ -58,12 +58,16 @@ function updateRoomAdd(data) {
 function updateRoomDelete(data, callback) {
   const ROOMS = getRooms();
   const roomIndex = ROOMS.findIndex((room) => room.name === data.room);
-  const userIndex = ROOMS[roomIndex].users.findIndex(
-    (user) => user === data.id
-  );
-  ROOMS[roomIndex].users.splice(userIndex, 1);
-  writeDB(roomdb, ROOMS);
-  callback(ROOMS[roomIndex]);
+  console.log("rooms: " + ROOMS +" index: "+ roomIndex)
+  if (roomIndex !== -1){
+
+    const userIndex = ROOMS[roomIndex].users.findIndex(
+      (user) => user === data.id
+    );
+    ROOMS[roomIndex].users.splice(userIndex, 1);
+    writeDB(roomdb, ROOMS);
+    callback(ROOMS[roomIndex]);
+  }
 }
 
 function getUsers() {

@@ -1,4 +1,4 @@
-const { response } = require("express");
+
 
 // Redirect to index when username does not exist in the session storage
 if (!window.sessionStorage.getItem("username")) window.location.href = "/";
@@ -27,23 +27,9 @@ socket.on("refresh", (m) => {
     });
 });
 
-socket.on("joinChat", ()=>{
-  const data = {
-    id:socket.id,
-    
-  }
-  
-  fetch("/api/users", {
-    method:"POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data)
+/* socket.emit("joinChat", (window.sessionStorage.getItem("username"))) */
 
-  })
-  .then((reponse)=>response.json())
-  .then()
-})
+
 
 // Initializes the contents of the page
 document.addEventListener("DOMContentLoaded", function () {

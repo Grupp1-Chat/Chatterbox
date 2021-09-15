@@ -4,11 +4,13 @@ if (window.sessionStorage.username) window.location.href = "/rooms.html";
 
 const uname = document.getElementById("username");
 const btn = document.getElementById("index-submit-btn");
+const socket = io();
 
 //once a user signs in with a username, the username is saved to the session storage with the value username
 btn.onclick = (e) => {
   e.preventDefault();
   if (!uname.value) return;
+  socket.emit("joinChat", uname.value)
   window.sessionStorage.setItem("username", uname.value);
-  window.location.href = "/rooms.html";
+  window.location.href = "/rooms.htlm";
 };

@@ -64,13 +64,11 @@ app.post("/api/rooms", (req, res) => {
   };
   DB.createRoom(format, (result) => res.send(result));
 });
-app.post("api/users", (req, res)=>{
-  const users 
 
-})
 
 // SocketIO connection
 io.on("connection", (socket) => {
+  console.log("connetcted")
   //For room page
   socket.on("refresh", () => {
     socket.join("__refresh_room");
@@ -78,17 +76,25 @@ io.on("connection", (socket) => {
   //
   //
   // When a user joins chat
+  tempUser=""
   socket.on("joinChat", (user)=>{
-    const currentUser = {id: socket.id, name:user.username, room:""}
-    DB.createRoom(currentUser)
+    tempUser=user
+   const userToSave = {
+     id: socket.id,
+     name: user,
+     room:""
+   }
+   console.log("spara user")
+    DB.createUser(userToSave)
 
   })
+ 
   // When a user joins a room
   socket.on("joinRoom", (user) => {
     const currentUser = { id: socket.id, name: user.username, room: user.room };
-
+    console.log(socket.username)
     // Saves socket id and username to the USERS collection
-    DB.createUser(currentUser);
+   /*  DB.createUser(currentUser); */
 
     // Saves to roomname with user socket id to the ROOM collection
     DB.updateRoomAdd(currentUser);
