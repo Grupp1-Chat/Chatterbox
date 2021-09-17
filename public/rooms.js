@@ -133,3 +133,10 @@ function joinPublicRoom(e) {
   window.sessionStorage.setItem("room", e.id);
   window.location.href = "/chat.html";
 }
+
+const signOut = () => {
+  sessionStorage.removeItem("username")
+  
+}
+
+
